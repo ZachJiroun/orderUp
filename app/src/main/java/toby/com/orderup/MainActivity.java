@@ -30,6 +30,7 @@ public class MainActivity extends Activity implements ServiceConnector.OnService
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         populateView();
+        // Yoshi's comment
     }
 
 
