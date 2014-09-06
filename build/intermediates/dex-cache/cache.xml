@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/Zach/clover/OrderUp/app/build/intermediates/pre-dexed/debug/calc-b76172d511240ece7a2cda0af76e413d8b073375.jar"
+        jar="/Users/Zach/clover/OrderUp/app/build/intermediates/exploded-aar/com.clover.sdk/clover-android-sdk/42/libs/calc.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="7caa199717301db5c1166c31489c50a2b8480edf"/>
+    <item
+        dex="/Users/Zach/clover/OrderUp/app/build/intermediates/pre-dexed/debug/classes-d7db401069e97c3b1cb6789c3e7e1d525e701287.jar"
+        jar="/Users/Zach/clover/OrderUp/app/build/intermediates/exploded-aar/com.clover.sdk/clover-android-sdk/42/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="15da517721595ade37e8237958ffe218420e3fcb"/>
+
+</pre-dex-items>
