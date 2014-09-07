@@ -2,40 +2,90 @@ package toby.com.orderup;
 
 import android.accounts.Account;
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IInterface;
+import android.os.RemoteException;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clover.sdk.util.CloverAccount;
+import com.clover.sdk.v1.BindingException;
+import com.clover.sdk.v1.ClientException;
 import com.clover.sdk.v1.ResultStatus;
 import com.clover.sdk.v1.ServiceConnector;
+import com.clover.sdk.v1.ServiceException;
 import com.clover.sdk.v3.employees.AccountRole;
 import com.clover.sdk.v3.employees.Employee;
 import com.clover.sdk.v3.employees.EmployeeConnector;
+import com.microsoft.windowsazure.mobileservices.*;
+
+import java.net.MalformedURLException;
 
 
-public class MainActivity extends Activity implements ServiceConnector.OnServiceConnectedListener, EmployeeConnector.OnActiveEmployeeChangedListener{
+public class MainActivity extends Activity implements ServiceConnector.OnServiceConnectedListener {
 
     private Account account;
     private EmployeeConnector mEmployeeConnector;
-    private AccountRole mRole;
     private Button submitButton;
-
+    private MobileServiceClient mClient;
+    private EditText editText;
+    private TextView eId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         populateView();
-        // Yoshi's comment
     }
 
-
     private void populateView() {
+
         submitButton = (Button) findViewById(R.id.submitButton);
+
+        editText = (EditText) findViewById(R.id.cellNumberEditText);
+
+        eId = (TextView) findViewById(R.id.eId);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    mClient = new MobileServiceClient(
+                            "https://orderup2.azure-mobile.net/",
+                            "BXfpcXcechDNSfdcEErRaVRpSKQXbu53",
+                            getApplicationContext()
+                    );
+                    Item item = new Item();
+                    item.Text = editText.getText().toString();
+                   // Toast.makeText(getApplicationContext(), employeeId.toString(), Toast.LENGTH_LONG).show();
+                    item.employeeid = "cheese";
+                    mClient.getTable(Item.class).insert(item, new TableOperationCallback<Item>() {
+                        public void onCompleted(Item entity, Exception exception, ServiceFilterResponse response) {
+                            if (exception == null) {
+                                // Insert succeeded
+                                System.out.println("yey");
+                            } else {
+                                // Insert failed
+                                System.out.println("you suck");
+                            }
+                        }
+                    });
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -105,16 +155,10 @@ public class MainActivity extends Activity implements ServiceConnector.OnService
             @Override
             public void onServiceSuccess(Employee result, ResultStatus status) {
                 super.onServiceSuccess(result, status);
-                mRole = result.getRole();
+                //eId.setText(result.getId());
+                Toast.makeText(getApplication(), result.getId(), Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    @Override
-    public void onActiveEmployeeChanged(Employee employee) {
-        if (employee != null) {
-            mRole = employee.getRole();
-        }
     }
 
     @Override

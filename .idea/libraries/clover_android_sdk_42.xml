@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="clover-android-sdk-42">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.clover.sdk/clover-android-sdk/42/libs/calc.jar!/" />
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.clover.sdk/clover-android-sdk/42/res" />
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.clover.sdk/clover-android-sdk/42/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.clover.sdk/clover-android-sdk/42/libs/calc.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
